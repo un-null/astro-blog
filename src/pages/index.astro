@@ -1,8 +1,10 @@
 ---
+import {getBlogs} from "../libs/microcms"
 
+const response = await getBlogs()
 ---
 
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -12,5 +14,12 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+		<div>
+			<ul>
+				{response.contents.map((content) => (
+					<li><a href={content.id}>{content.title}</a></li>
+				))}
+			</ul>
+		</div>
 	</body>
 </html>
