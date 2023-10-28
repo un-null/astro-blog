@@ -1,0 +1,48 @@
+---
+import { cva } from '../../styled-system/css';
+import Header from '../components/Header.astro';
+
+const { title } = Astro.props
+
+const layout = cva({
+	base: {
+		width: "screen",
+		minH: "100dvh",
+		bg: "#1c1c1c",
+		color: "neutral.50",
+		display: "grid",
+		gridTemplateRows: "auto 1fr",
+		pb: "10",
+		paddingX: "4",
+        sm: {
+            paddingX: "8"
+        }
+	},
+	variants: {
+		main: {
+			container: {
+				maxW: "4xl",
+				marginX: "auto",
+				marginTop: "10",
+			}
+		}
+	}
+})
+---
+
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class={layout()}>
+		<Header />
+		<main class={layout({ main: "container"})}>
+			<slot />
+		</main>
+
+	</body>
+</html>

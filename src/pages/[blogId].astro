@@ -1,4 +1,6 @@
 ---
+import { cva } from "../../styled-system/css";
+import RootLayout from "../layouts/RootLayout.astro";
 import {getBlogDetail, getBlogs} from "../libs/microcms"
 
 export async function getStaticPaths() {
@@ -12,10 +14,37 @@ export async function getStaticPaths() {
 
 const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId as string);
+
+const style = cva({
+  base: {
+    color: "neutral.50",
+    fontSize: "sm",
+  },
+
+  variants: {
+    text: {
+      title: {
+        fontSize: "2xl",
+        fontWeight: "bold"
+      },
+      time: {
+				color: "neutral.400",
+        fontSize: "sm",
+        mt: "4",
+      },
+      content: {
+        mt: "10"
+      }
+    }
+  }
+})
 ---
 
-<main>
-    <h1 class="title">{blog.title}</h1>
-    <p class="publishedAt">公開日時：{blog.publishedAt}</p>
-    <div class="post" set:html={blog.content}></div>
-</main>
+
+<RootLayout>
+  <div>
+    <h1 class={style({ text: "title" })}>{blog.title}</h1>
+    <time class={style({ text: "time" })}>公開日時：{blog.publishedAt.slice(0, 7)}</time>
+    <div class={style({ text: "content" })} set:html={blog.content} />
+  </div>
+</RootLayout>

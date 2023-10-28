@@ -1,23 +1,49 @@
-import { defineConfig } from "@pandacss/dev";
+import { defineConfig, defineGlobalStyles } from "@pandacss/dev";
+
+const globalCss = defineGlobalStyles({
+  h3: {
+    color: "#fafafa",
+    fontSize: "xl",
+    lineHeight: 2,
+    marginTop: "6",
+    marginBottom: "2",
+  },
+  p: {
+    lineHeight: 2,
+  },
+  ul: {
+    listStyle: "inside",
+    listStyleType: "circle",
+  },
+  ol: {
+    listStyle: "inside",
+    listStyleType: "decimal",
+  },
+  blockquote: {
+    borderLeft: "3px solid",
+    borderColor: "#a3a3a3",
+    paddingLeft: "4",
+  },
+  pre: {
+    bgColor: "#1f2937",
+    borderRadious: "md",
+    p: "4",
+  },
+});
 
 export default defineConfig({
-  // Whether to use css reset
   preflight: true,
-
-  // Where to look for your css declarations
+  globalCss,
   include: [
     "./src/**/*.{ts,tsx,js,jsx,astro}",
     "./pages/**/*.{ts,tsx,js,jsx,astro}",
   ],
 
-  // Files to exclude
   exclude: [],
 
-  // Useful for theme customization
   theme: {
     extend: {},
   },
 
-  // The output directory for your css system
   outdir: "styled-system",
 });

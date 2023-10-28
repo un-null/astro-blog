@@ -1,27 +1,85 @@
 ---
-import { css } from '../../styled-system/css';
+import { cva } from "../../styled-system/css";
 
-import {getBlogs} from "../libs/microcms"
+import  {getBlogs } from "../libs/microcms"
+import RootLaytout  from "../layouts/RootLayout.astro"
 
 const response = await getBlogs()
+
+const timeline = cva({
+	variants: {
+		main: {
+			base: {
+				position: "relative",
+				p: "4",
+				borderLeft: "1px solid #737373",
+				listStyle: "none"
+			},
+			container: {
+				mb: "10",
+				ml: "4"
+			},
+			line: {
+				position: "absolute",
+				w: "3",
+				h: "3",
+				bgColor: "purple.500",
+				borderRadius: "full",
+				mt: "-5",
+				left: "-1.5",
+				border: "white",
+				cursor: "default"
+			},
+			card: {
+				display: "block",
+				w: "full",
+				maxW: "500px",
+				bgColor: "neutral.800",
+				borderRadius: "md",
+				p: "4",
+				"&:hover": {
+					bgColor: "neutral.700",
+				},
+			}
+		},
+		text: {
+			time: {
+				mb: "1",
+				fontSize: "sm",
+				fontWeight: "semibold",
+				lineHeight: "none",
+				color: "neutral.400"
+			},
+			title: {
+				fontSize: "lg",
+				fontWeight: "bold",
+				mt: "2"
+			},
+			label: {
+				fontSize: "lg",
+				fontWeight: "bold",
+				mb: "4",
+				color: "neutral.300",
+				cursor: "default"
+			}
+		}
+	}
+})
 ---
 
-<html lang="ja">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1 class={css({fontSize: "2xl", fontWeight: "bold" })}>Astro</h1>
-		<div>
-			<ul>
-				{response.contents.map((content) => (
-					<li><a href={content.id}>{content.title}</a></li>
-				))}
-			</ul>
-		</div>
-	</body>
-</html>
+<RootLaytout title="Home">
+	<h1 class={timeline({ text: "label" })}>Trim Log</h1>
+	<ul class={timeline({ main: "base"})}>
+		{response.contents.map((content) => (
+			<li class={timeline({ main: "container" })}>
+				<a href={content.id} class={timeline({ main: "card" })}>
+					<div class={timeline({ main: "line" })}></div>
+					<time class={timeline({ text: "time" })}>{content.publishedAt.slice(0, 7)}</time>
+					<h3 class={timeline({ text: "title" })}>{content.title}</h3>
+				</a>
+			</li>
+		))}
+	</ul>
+</RootLaytout>
+
+
