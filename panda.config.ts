@@ -25,8 +25,8 @@ const globalCss = defineGlobalStyles({
     paddingLeft: "4",
   },
   pre: {
-    bgColor: "#1f2937",
-    borderRadious: "md",
+    bgColor: "#333333",
+    borderRadius: "md",
     p: "4",
   },
 });
