@@ -1,4 +1,6 @@
 ---
+import { css } from '../../styled-system/css';
+
 import {getBlogs} from "../libs/microcms"
 
 const response = await getBlogs()
@@ -13,7 +15,7 @@ const response = await getBlogs()
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<h1 class={css({fontSize: "2xl", fontWeight: "bold" })}>Astro</h1>
 		<div>
 			<ul>
 				{response.contents.map((content) => (
