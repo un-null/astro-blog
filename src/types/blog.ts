@@ -6,6 +6,7 @@ export type Blog = {
   revisedAt: string;
   title: string;
   content: string;
+  description: string;
 };
 export type BlogResponse = {
   totalCount: number;

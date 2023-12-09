@@ -3,7 +3,7 @@ import { ViewTransitions } from 'astro:transitions';
 import { cva } from '../../styled-system/css';
 import Header from '../components/Header.astro';
 
-const { title } = Astro.props
+const { title, desc } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, 'https://astro-blog-3n4.pages.dev/');
 const ogpImageURL = new URL('/ogp.png', canonicalURL);
 
@@ -42,7 +42,7 @@ const layout = cva({
 		<meta name="twitter:card" content="summary" />
 		<meta property="og:image" content={ogpImageURL} />
 		<title>{title}</title>
-		<meta name="description" content="null's tech blog">
+		<meta name="description" content={desc}>
 		<ViewTransitions fallback="none" />
 	</head>
 	<body class={layout()}>
