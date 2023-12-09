@@ -4,6 +4,7 @@ import { cva } from '../../styled-system/css';
 import Header from '../components/Header.astro';
 
 const { title } = Astro.props
+const socialImageURL = new URL("/opg.png", Astro.url);
 
 const layout = cva({
 	base: {
@@ -37,6 +38,8 @@ const layout = cva({
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={socialImageURL} />
 		<title>{title}</title>
 		<meta name="description" content="null's tech blog">
 		<ViewTransitions fallback="none" />
