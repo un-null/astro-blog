@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import { cva } from '../../styled-system/css';
 import Header from '../components/Header.astro';
 
@@ -30,7 +31,7 @@ const layout = cva({
 })
 ---
 
-<html lang="ja">
+<html lang="ja" transition:animate="slide">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -38,6 +39,7 @@ const layout = cva({
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content="null's tech blog">
+		<ViewTransitions fallback="none" />
 	</head>
 	<body class={layout()}>
 		<Header />
